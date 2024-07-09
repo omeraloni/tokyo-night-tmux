@@ -18,8 +18,8 @@ BATTERY_NAME=$(tmux show-option -gv @tokyo-night-tmux_battery_name 2>/dev/null)
 BATTERY_LOW=$(tmux show-option -gv @tokyo-night-tmux_battery_low_threshold 2>/dev/null)
 RESET="#[fg=brightwhite,bg=#15161e,nobold,noitalics,nounderscore,nodim]"
 
-DISCHARGING_ICONS=("󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹")
-CHARGING_ICONS=("󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰂋" "󰂅")
+DISCHARGING_ICONS=("󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹")
+CHARGING_ICONS=("󰢟" "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰂋" "󰂅")
 NOT_CHARGING_ICON="󰚥"
 NO_BATTERY_ICON="󱉝"
 DEFAULT_BATTERY_LOW=21
@@ -102,10 +102,10 @@ fi
 # Determine icon and color based on battery status and percentage
 case "$BATTERY_STATUS" in
 "Charging" | "Charged" | "charging" | "Charged")
-  ICON="${CHARGING_ICONS[$((BATTERY_PERCENTAGE / 10 - 1))]}"
+  ICON="${CHARGING_ICONS[$((BATTERY_PERCENTAGE / 10))]}"
   ;;
 "Discharging" | "discharging")
-  ICON="${DISCHARGING_ICONS[$((BATTERY_PERCENTAGE / 10 - 1))]}"
+  ICON="${DISCHARGING_ICONS[$((BATTERY_PERCENTAGE / 10))]}"
   ;;
 "Full" | "charged" | "full" | "AC")
   ICON="$NOT_CHARGING_ICON"
