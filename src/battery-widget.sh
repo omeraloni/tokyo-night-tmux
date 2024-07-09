@@ -53,7 +53,7 @@ battery_exists() {
 
 # Exit if no battery is found
 if ! battery_exists; then
-  echo "#[fg=green,bg=default]░ ${NOT_CHARGING_ICON}${RESET}#[bg=default]"
+  echo "#[fg=green,bg=default]${THEME['segment_seperator_right']} ${NOT_CHARGING_ICON}${RESET}#[bg=default]"
   exit 0
 fi
 
@@ -102,10 +102,10 @@ fi
 # Determine icon and color based on battery status and percentage
 case "$BATTERY_STATUS" in
 "Charging" | "Charged" | "charging" | "Charged")
-  ICON="${CHARGING_ICONS[$((BATTERY_PERCENTAGE / 10))]}"
+  ICON="${CHARGING_ICONS[$((BATTERY_PERCENTAGE / 10 - 1))]}"
   ;;
 "Discharging" | "discharging")
-  ICON="${DISCHARGING_ICONS[$((BATTERY_PERCENTAGE / 10))]}"
+  ICON="${DISCHARGING_ICONS[$((BATTERY_PERCENTAGE / 10 - 1))]}"
   ;;
 "Full" | "charged" | "full" | "AC")
   ICON="$NOT_CHARGING_ICON"
