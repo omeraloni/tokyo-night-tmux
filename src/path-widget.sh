@@ -4,6 +4,9 @@
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.."
 . "${ROOT_DIR}/lib/coreutils-compat.sh"
 
+CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source $CURRENT_DIR/themes.sh
+
 # get value from tmux config
 SHOW_PATH=$(tmux show-option -gv @tokyo-night-tmux_show_path 2>/dev/null)
 PATH_FORMAT=$(tmux show-option -gv @tokyo-night-tmux_path_format 2>/dev/null) # full | relative
@@ -23,4 +26,4 @@ if [[ ${PATH_FORMAT} == "relative" ]]; then
   current_path="$(echo ${current_path} | sed 's#'"$HOME"'#~#g')"
 fi
 
-echo "#[fg=blue,bg=default]░  ${RESET}#[bg=default]${current_path} "
+echo "#[fg=blue,bg=default]${THEME['segment_seperator_right']}  ${RESET}#[bg=default]${current_path} "

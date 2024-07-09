@@ -83,3 +83,44 @@ THEME['ghred']="#d73a4a"
 THEME['ghyellow']="#d29922"
 
 RESET="#[fg=${THEME[foreground]},bg=${THEME[background]},nobold,noitalics,nounderscore,nodim]"
+
+# Defaults
+default_segment_seperator_datetime=""
+default_segment_seperator_left=""
+default_segment_seperator_right="░"
+default_prefix_off="blue"
+default_prefix_on="blue"
+default_message_style_bg_color="blue"
+default_message_style_fg_color="background"
+default_prefix_on_icon="󰠠"
+default_prefix_off_icon="󰤂"
+default_shell_icon=""
+default_ssh_icon="󰣀"
+default_last_flag_icon="󰁯"
+
+# Load alternate options
+THEME['segment_seperator_datetime']=$(tmux show-option -gv @tokyo-night-tmux_segment_seperator_datetime 2>/dev/null)
+THEME['segment_seperator_right']=$(tmux show-option -gv @tokyo-night-tmux_segment_seperator_right 2>/dev/null)
+THEME['segment_seperator_left']=$(tmux show-option -gv @tokyo-night-tmux_segment_seperator_left 2>/dev/null)
+THEME['prefix_off']=$(tmux show-option -gv @tokyo-night-tmux_prefix_off 2>/dev/null)
+THEME['prefix_on']=$(tmux show-option -gv @tokyo-night-tmux_prefix_on 2>/dev/null)
+THEME['message_style_bg']=$(tmux show-option -gv @tokyo-night-tmux_message_style_bg_color 2>/dev/null)
+THEME['message_style_fg']=$(tmux show-option -gv @tokyo-night-tmux_message_style_fg_color 2>/dev/null)
+THEME['prefix_on_icon']=$(tmux show-option -gv @tokyo-night-tmux_prefix_on_icon 2>/dev/null)
+THEME['prefix_off_icon']=$(tmux show-option -gv @tokyo-night-tmux_prefix_off_icon 2>/dev/null)
+THEME['shell_icon']=$(tmux show-option -gv @tokyo-night-tmux_shell_icon 2>/dev/null)
+THEME['ssh_icon']=$(tmux show-option -gv @tokyo-night-tmux_ssh_icon 2>/dev/null)
+THEME['last_flag_icon']=$(tmux show-option -gv @tokyo-night-tmux_last_flag_icon 2>/dev/null)
+
+THEME['segment_seperator_datetime']="${THEME['segment_seperator_datetime']:-$default_segment_seperator_datetime}"
+THEME['segment_seperator_left']="${THEME['segment_seperator_left']:-$default_segment_seperator_left}"
+THEME['segment_seperator_right']="${THEME['segment_seperator_right']:-$default_segment_seperator_right}"
+THEME['prefix_off']="${THEME['prefix_off']:-$default_prefix_off}"
+THEME['prefix_on']="${THEME['prefix_on']:-$default_prefix_on}"
+THEME['message_style_bg']="${THEME['message_style_bg']:-$default_message_style_bg_color}"
+THEME['message_style_fg']="${THEME['message_style_fg']:-$default_message_style_fg_color}"
+THEME['prefix_on_icon']="${THEME['prefix_on_icon']:-$default_prefix_on_icon}"
+THEME['prefix_off_icon']="${THEME['prefix_off_icon']:-$default_prefix_off_icon}"
+THEME['shell_icon']="${THEME['shell_icon']:-$default_shell_icon}"
+THEME['ssh_icon']="${THEME['ssh_icon']:-$default_ssh_icon}"
+THEME['last_flag_icon']="${THEME['last_flag_icon']:-$default_last_flag_icon}"

@@ -4,6 +4,9 @@
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.."
 . "${ROOT_DIR}/lib/coreutils-compat.sh"
 
+CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source $CURRENT_DIR/themes.sh
+
 # Check if the battery widget is enabled
 SHOW_BATTERY_WIDGET=$(tmux show-option -gv @tokyo-night-tmux_show_battery_widget 2>/dev/null)
 if [ "${SHOW_BATTERY_WIDGET}" != "1" ]; then
@@ -122,4 +125,4 @@ else
 fi
 
 # Print the battery status with some extra spaces for padding
-echo "${color}░ ${ICON}${RESET} #[bg=default] ${BATTERY_PERCENTAGE}% "
+echo "${color}${THEME['segment_seperator_right']} ${ICON}${RESET} #[bg=default] ${BATTERY_PERCENTAGE}% "

@@ -16,10 +16,11 @@ tmux set -g status-left-length 80
 tmux set -g status-right-length 150
 
 RESET="#[fg=${THEME[foreground]},bg=${THEME[background]},nobold,noitalics,nounderscore,nodim]"
+
 # Highlight colors
 tmux set -g mode-style "fg=${THEME[bgreen]},bg=${THEME[bblack]}"
 
-tmux set -g message-style "bg=${THEME[blue]},fg=${THEME[background]}"
+tmux set -g message-style "bg=${THEME['message_style_bg']},fg=${THEME['message_style_fg']}"
 tmux set -g message-command-style "fg=${THEME[white]},bg=${THEME[black]}"
 
 tmux set -g pane-border-style "fg=${THEME[bblack]}"
@@ -52,16 +53,18 @@ date_and_time="$($SCRIPTS_PATH/datetime-widget.sh)"
 current_path="#($SCRIPTS_PATH/path-widget.sh #{pane_current_path})"
 battery_status="#($SCRIPTS_PATH/battery-widget.sh)"
 
-#+--- Bars LEFT ---+
-# Session name
-tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S "
+#+--- Left segments ---+
+prefix_indicator="#[fg=${THEME[bblack]},bold]#{?client_prefix,#[bg=${THEME['prefix_on']}] ${THEME['prefix_on_icon']} ,#[bg=${THEME['prefix_off']},dim] ${THEME['prefix_off_icon']} }"
+session_name="#[bold,nodim]#S #[bg=${THEME[bblack]},bold]#{?client_prefix,#[fg=${THEME['prefix_on']}],#[fg=${THEME['prefix_off']},bg=${THEME[background]}]}${THEME[segment_seperator_left]}"
+
+tmux set -g status-left "$prefix_indicator$session_name"
 
 #+--- Windows ---+
-# Focus
-tmux set -g window-status-current-format "$RESET#[fg=${THEME[green]},bg=${THEME[bblack]}] #{?#{==:#{pane_current_command},ssh},󰣀 , }#[fg=${THEME[foreground]},bold,nodim]$window_number#W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane}#{?window_last_flag, , }"
+# Focused
+tmux set -g window-status-current-format "$RESET#[fg=${THEME[background]},bg=${THEME[bblack]}]${THEME['segment_seperator_left']}#[fg=${THEME[green]},bg=${THEME[bblack]}] #{?#{==:#{pane_current_command},ssh},${THEME['ssh_icon']} ,${THEME['shell_icon']} }#[fg=${THEME[foreground]},bold,nodim]$window_number#W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane}#{?window_last_flag, , }#[fg=${THEME[bblack]},bg=${THEME[background]}]${THEME[segment_seperator_left]}"
 # Unfocused
-tmux set -g window-status-format "$RESET#[fg=${THEME[foreground]}] #{?#{==:#{pane_current_command},ssh},󰣀 , }${RESET}$window_number#W#[nobold,dim]#{?window_zoomed_flag, $zoom_number, $custom_pane}#[fg=${THEME[yellow]}]#{?window_last_flag,󰁯  , }"
+tmux set -g window-status-format "$RESET#[fg=${THEME[foreground]}] #{?#{==:#{pane_current_command},ssh},${THEME['ssh_icon']} ,${THEME['shell_icon']} }${RESET}$window_number#W#[nobold,dim]#{?window_zoomed_flag, $zoom_number, $custom_pane}#[fg=${THEME[yellow]}]#{?window_last_flag,${THEME['last_flag_icon']}  , }"
 
-#+--- Bars RIGHT ---+
+#+--- Right segments ---+
 tmux set -g status-right "$battery_status$current_path$cmus_status$netspeed$git_status$wb_git_status$date_and_time"
 tmux set -g window-status-separator ""
