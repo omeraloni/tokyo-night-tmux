@@ -125,4 +125,4 @@ else
 fi
 
 # Print the battery status with some extra spaces for padding
-echo "${color}${THEME['segment_seperator_right']} ${ICON}${RESET} #[bg=default] ${BATTERY_PERCENTAGE}% "
+echo "${color}${THEME['segment_seperator_right']} ${ICON}${RESET}#[bg=default] ${BATTERY_PERCENTAGE}% "
