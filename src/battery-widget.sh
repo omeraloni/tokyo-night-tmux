@@ -107,7 +107,7 @@ case "$BATTERY_STATUS" in
 "Discharging" | "discharging")
   ICON="${DISCHARGING_ICONS[$((BATTERY_PERCENTAGE / 10))]}"
   ;;
-"Full" | "charged" | "full" | "AC")
+"Full" | "charged" | "full" | "AC" | "finishing")
   ICON="$NOT_CHARGING_ICON"
   ;;
 *)
