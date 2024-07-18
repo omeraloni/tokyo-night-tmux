@@ -52,6 +52,7 @@ zoom_number="#($SCRIPTS_PATH/custom-number.sh #P $zoom_id_style)"
 date_and_time="$($SCRIPTS_PATH/datetime-widget.sh)"
 current_path="#($SCRIPTS_PATH/path-widget.sh #{pane_current_path})"
 battery_status="#($SCRIPTS_PATH/battery-widget.sh)"
+connectivity_status="#($SCRIPTS_PATH/connectivity-widget.sh)"
 
 #+--- Left segments ---+
 prefix_indicator="#[fg=${THEME[bblack]},bold]#{?client_prefix,#[bg=${THEME['prefix_on']}] ${THEME['prefix_on_icon']} ,#[bg=${THEME['prefix_off']},dim] ${THEME['prefix_off_icon']} }"
@@ -66,5 +67,5 @@ tmux set -g window-status-current-format "$RESET#[fg=${THEME[background]},bg=${T
 tmux set -g window-status-format "$RESET#[fg=${THEME[foreground]}] #{?#{==:#{pane_current_command},ssh},${THEME['ssh_icon']} ,${THEME['shell_icon']} }${RESET}$window_number#W#[nobold,dim]#{?window_zoomed_flag, $zoom_number, $custom_pane}#[fg=${THEME[yellow]}]#{?window_last_flag,${THEME['last_flag_icon']}  , }"
 
 #+--- Right segments ---+
-tmux set -g status-right "$battery_status$current_path$cmus_status$netspeed$git_status$wb_git_status$date_and_time"
+tmux set -g status-right "$battery_status$current_path$cmus_status$netspeed$git_status$wb_git_status$connectivity_status$date_and_time"
 tmux set -g window-status-separator ""
